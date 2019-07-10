@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+    id 'jacoco'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.11.1'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'PACKAGE'
+            includes = ['com.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+        }
+    }
+    dependsOn(jacocoTestReport)
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+mainClassName = 'com.utils.App'
