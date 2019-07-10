@@ -83,7 +83,7 @@ public class LocaleUtils {
     }
 
     private boolean isAllLowerCase(final CharSequence cs) {
-        if (isEmpty(cs)) {
+        if (cs == null || isEmpty(cs)) {
             return false;
         }
         final int sz = cs.length();
@@ -96,7 +96,7 @@ public class LocaleUtils {
     }
 
     private boolean isAllUpperCase(final CharSequence cs) {
-        if (isEmpty(cs)) {
+        if (cs == null || isEmpty(cs)) {
             return false;
         }
         final int sz = cs.length();
